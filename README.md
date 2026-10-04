@@ -1,10 +1,10 @@
 # GitHub Kameleon
 
-A pixel chameleon creeps along a branch under your contribution graph. It eats each week with its tongue and turns the colour of the brightest day it just ate. Once it reaches the end, your year grows back and it starts again.
+A chameleon creeps along a branch under your contribution graph, rocking gently as it walks. Its eye swivels onto each week, its tongue snaps out and carries the lit days back into its mouth, and the colour of the brightest day it just ate washes over its skin from head to tail. Once it reaches the end, your year grows back and it starts again.
 
 ![Kameleon](https://raw.githubusercontent.com/Kameleon21/gh-kameleon/main/kameleon.svg)
 
-The output is a single animated SVG, about 70 KB. It uses only CSS animation, so it plays inside a GitHub README.
+The output is a single animated SVG, about 110 KB, drawn with vector paths and animated with CSS keyframes and SMIL only (no scripts, fonts or images), so it plays inside a GitHub README in Chrome, Firefox and Safari. One loop takes about 21 seconds.
 
 ## Add to Your Profile
 

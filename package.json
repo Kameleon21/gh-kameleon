@@ -1,7 +1,7 @@
 {
   "name": "gh-kameleon",
   "version": "1.0.0",
-  "description": "A pixel chameleon that eats your GitHub contribution graph and turns the colour of what it eats",
+  "description": "A chameleon that eats your GitHub contribution graph and turns the colour of what it eats",
   "type": "module",
   "private": true,
   "bin": { "gh-kameleon": "src/cli.ts" },
