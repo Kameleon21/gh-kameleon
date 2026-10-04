@@ -1,0 +1,57 @@
+name: 'GitHub Kameleon'
+description: 'A pixel chameleon that eats your contribution graph and turns the colour of what it eats'
+author: 'Kamil Rogozinski'
+branding:
+  icon: 'feather'
+  color: 'green'
+
+inputs:
+  username:
+    description: 'GitHub username to fetch contributions for'
+    required: false
+    default: ${{ github.repository_owner }}
+  output:
+    description: 'Output file path for the generated SVG'
+    required: false
+    default: 'kameleon.svg'
+  step:
+    description: 'Seconds the chameleon spends on each week (lower is faster)'
+    required: false
+    default: '0.3'
+  tagline:
+    description: 'Text shown next to your username'
+    required: false
+    default: 'you are what you commit'
+  github_token:
+    description: 'Token used to read the contribution calendar'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  output_path:
+    description: 'Path to the generated SVG file'
+    value: ${{ steps.generate.outputs.output_path }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Bun
+      uses: oven-sh/setup-bun@v2
+
+    - name: Generate Kameleon
+      id: generate
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_USERNAME: ${{ inputs.username }}
+        INPUT_OUTPUT: ${{ github.workspace }}/${{ inputs.output }}
+        INPUT_STEP: ${{ inputs.step }}
+        INPUT_TAGLINE: ${{ inputs.tagline }}
+      run: |
+        mkdir -p "$(dirname "$INPUT_OUTPUT")"
+        bun "${{ github.action_path }}/src/cli.ts" \
+          --username "$INPUT_USERNAME" \
+          --output "$INPUT_OUTPUT" \
+          --step "$INPUT_STEP" \
+          --tagline "$INPUT_TAGLINE"
+        echo "output_path=$INPUT_OUTPUT" >> "$GITHUB_OUTPUT"
